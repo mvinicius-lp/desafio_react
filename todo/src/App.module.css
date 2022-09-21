@@ -2,8 +2,10 @@
     min-height: 55vh;
     padding: 2em;
     text-align: center;
+    background-color: rgba(15, 25, 20, 0.1);
 }
 
 .main h2{
+ color: #346892;
  margin-bottom: 0.8em;
 }

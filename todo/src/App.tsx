@@ -15,7 +15,7 @@ function App() {
      <Header />
      <main className={styles.main}>
         <div>
-          <h2>Nota</h2>
+          <h2>Crie uma nota</h2>
           <TeskForm btnText="Criar nota"/>
         </div>
         <div>

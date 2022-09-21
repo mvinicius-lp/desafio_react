@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className={styles.footer}>
     <footer>
       <p>
-        <span>todo-app</span> @ 2022
+        <span>todo-app</span> @flimed 2022
       </p>
     </footer>
   </footer>
