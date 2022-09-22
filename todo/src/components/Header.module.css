@@ -1,24 +1,6 @@
-.header{
-    height: 50px;
-    background-color: rgba(15, 25, 20, 0.1);
-    color: #00DBB2;
-    text-align: center;
-}
-.header a{
-    color: #346892;
-    padding-right: 20px;
-    padding-left: 20px; 
-    text-decoration: none;
-}
-
-
-.header a:hover{
-    background-color: white;
-    border-radius: 0px;
-    text-decoration: underline;
-}
-
-.header button{
-    background-color:#00DBB2;
-    color: #346892;
+.header {
+  background-color: #123D74;
+  color: #00DBB2;
+  text-align: center;
+  padding: 1em;
 }

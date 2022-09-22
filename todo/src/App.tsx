@@ -1,32 +1,87 @@
-import React from 'react';
-// components
-import Header from './components/Header';
-import Footer from './components/Footer';
-import TeskForm from './components/TeskForm';
-import TeskList from './components/TeskList';
-
-//CSS
+import React, { useState } from "react";
 import styles from "./App.module.css";
 
-// 1 - config react router, sem links
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+// components
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Modal from "./components/Modal";
+import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
 
+// interfaces
+import { ITask } from "./interfaces/Task";
 
 function App() {
+  const [taskList, setTaskList] = useState<ITask[]>([]);
+  const [taskToUpdate, setTaskToUpdate] = useState<ITask | null>(null);
+
+  const deleteTask = (title: string): void => {
+    setTaskList(
+      taskList.filter((task) => {
+        return task.title !== title;
+      })
+    );
+  };
+
+  const hideOrShowModal = (display: boolean) => {
+    const modal = document.getElementById("modal");
+    if (display) {
+      modal!.classList.remove("hide");
+    } else {
+      modal!.classList.add("hide");
+    }
+  };
+
+  const editTask = (task: ITask): void => {
+    hideOrShowModal(true);
+    setTaskToUpdate(task);
+  };
+
+  const updateTask = (id: number, title: string, difficulty: string, content: string) => {
+    const updatedTask: ITask = { id, title, difficulty, content};
+
+    const updatedItems = taskList.map((task) => {
+      return task.id === updatedTask.id ? updatedTask : task;
+    });
+
+    setTaskList(updatedItems);
+
+    hideOrShowModal(false);
+  };
+
   return (
     <div>
-      <Header/>
-     <main className={styles.main}>
-        <div>
-          <h2>Crie uma nota</h2>
-          <TeskForm btnText="Criar nota"/>
+      <Modal
+        title="Editar tarefa"
+        children={
+          <TaskForm
+            btnText="Editar"
+            taskList={taskList}
+            task={taskToUpdate}
+            handleUpdate={updateTask}
+          />
+        }
+      />
+      <Header />
+      <main className={styles.main}>
+        <div className={styles.todo_form}>
+          <h2>Cadastre uma nota</h2>
+          <TaskForm
+            taskList={taskList}
+            setTaskList={setTaskList}
+            btnText="Cadastrar"
+          />
         </div>
-        <div>
-          <h2>Suas notas</h2>
-          <TeskList/>
+        <div className="todo-container">
+          <h2>Suas notas:</h2>
+          <TaskList
+            taskList={taskList}
+            handleDelete={deleteTask}
+            handleEdit={editTask}
+          />
         </div>
-     </main>
-     <Footer />
+      </main>
+      <Footer />
     </div>
   );
 }
