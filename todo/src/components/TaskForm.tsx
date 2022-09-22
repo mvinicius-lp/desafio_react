@@ -31,7 +31,7 @@ const TaskForm = ({
       setId(task.id);
       setTitle(task.title);
       setDifficulty(task.difficulty);
-      setDifficulty(task.content);
+      setContent(task.content);
     }
   }, [task]);
 
@@ -83,7 +83,7 @@ const TaskForm = ({
       <div className={styles.input_container}>
         <label htmlFor="difficulty">Descrição</label>
         <input
-          type="string"
+          type="text"
           name="difficulty"
           placeholder="Descrição da nota"
           value={difficulty}

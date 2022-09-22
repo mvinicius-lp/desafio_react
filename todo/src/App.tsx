@@ -7,9 +7,11 @@ import Header from "./components/Header";
 import Modal from "./components/Modal";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
+import Login from "./components/Login";
 
 // interfaces
 import { ITask } from "./interfaces/Task";
+import Cadastro from "./components/Cadastro";
 
 function App() {
   const [taskList, setTaskList] = useState<ITask[]>([]);
@@ -62,7 +64,7 @@ function App() {
           />
         }
       />
-      <Header />
+      <Header/>
       <main className={styles.main}>
         <div className={styles.todo_form}>
           <h2>Cadastre uma nota</h2>
