@@ -6,6 +6,8 @@ import { ITask } from "../../interfaces/Task";
 // styles
 import styles from "./TaskForm.module.css";
 
+import {Notas} from '../../service/api'
+
 interface Props {
   btnText: string;
   taskList: ITask[];

@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '../Logar/Login.module.css'
 import {LoginUser} from "../../service/api";
+import { Link } from 'react-router-dom';
 
 type Props = {}
 
@@ -30,11 +31,12 @@ const Login = (props: Props) => {
       <div>
         <p>
           Ainda não tem uma conta?
-          <a href=""> Cadastre-se</a>
+          <Link to="/cadastro"> Cadastre-se</Link>
         </p>
       </div>
     </form>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></div>
+    <br /><br /><br /><br /><br /><br /><br /><br />
+  </div>
   )
 }
 

@@ -10,7 +10,7 @@ import Navbar from './pages/Navbar/Navbar';
 const Routess: any = () => {
     return (
         <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro/>}/>
             <Route path="/form" element={<Form />} />
         </Routes>

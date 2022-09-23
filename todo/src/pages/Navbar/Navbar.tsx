@@ -8,8 +8,8 @@ const Navbar = () => {
   return (
     <nav className={styles.header}>
      <div className={styles.acoes}>
-        <a href="">Cadastrar nota</a>
-        <a href="">Ver notas</a>
+        <Link to="/form">Cadastrar nota</Link>
+        <Link to="/notas">Ver notas</Link>
     </div>
     </nav>
   );

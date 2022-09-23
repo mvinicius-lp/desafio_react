@@ -26,8 +26,10 @@ function App() {
   return (
     <div>
       <BrowserRouter>
+        <Navbar/>
         <Routess/>
       </BrowserRouter>
+      <Footer/>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '../Logar/Login.module.css'
 import {CadastroUser} from '../../service/api'
+import { Link } from 'react-router-dom'
 
 type Props = {}
 
@@ -37,10 +38,10 @@ const Cadastro = (props: Props) => {
       <input type="submit" value="Cadastrar"/>
       <p>  
           Já tem conta?
-          <a href=""> Ir para Login </a>
+          <Link to="/"> Ir para Login </Link>
       </p>
     </form>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></div>
+    <br /><br /><br /><br /><br /><br /></div>
   )
 }
 
