@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from '../Logar/Login.module.css'
+import {CadastroUser} from '../../service/api'
 
 type Props = {}
 
@@ -8,6 +9,15 @@ const Cadastro = (props: Props) => {
     <div className={styles.center}>
       <br /><br /><br /><br /><br />
       <form className={styles.form}>
+      <h1 id={styles.cadastro}>Cadastro</h1>
+      <div className={styles.input_container}>
+        <label htmlFor="nome">Nome</label>
+        <input
+          type="text"
+          name="nome"
+          placeholder="Digite seu nome"
+        />
+      </div>
       <div className={styles.input_container}>
         <label htmlFor="email">Email</label>
         <input

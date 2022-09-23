@@ -18,17 +18,16 @@ import Form from "./pages/Form/Form";
 import Modalx from "./pages/Modal/Modal"
 import Notas from "./pages/Notas/Notas";
 import TaskList from "./pages/Lista/TaskList";
+import Navbar from "./pages/Navbar/Navbar";
 
 function App() {
 
 
   return (
     <div>
-      <Header/>
       <BrowserRouter>
-        <Login/>
+        <Routess/>
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }

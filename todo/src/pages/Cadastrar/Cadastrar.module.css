@@ -39,6 +39,13 @@ body{
   font-weight: bold;
   margin-bottom: 0.4em;
 }
-#center{
+.center{
   text-align: center;
+}
+a{
+  text-decoration: none;
+}
+.cadastro{
+  text-align: center;
+  justify-content: center center;
 }

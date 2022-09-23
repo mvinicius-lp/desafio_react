@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from '../Logar/Login.module.css'
+import {LoginUser} from "../../service/api";
 
 type Props = {}
 
@@ -8,6 +9,7 @@ const Login = (props: Props) => {
     <div className={styles.center}>
       <br /><br /><br /><br /><br />
       <form className={styles.form}>
+      <h1>Login</h1>
       <div className={styles.input_container}>
         <label htmlFor="email">Email</label>
         <input

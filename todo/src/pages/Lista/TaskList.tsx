@@ -25,7 +25,7 @@ const TaskList = ({ taskList, handleDelete, handleEdit }: Props) => {
             </div>
             </div>
             <div className={styles.actions}>
-              <i className="bi bi-pencil" onClick={() => handleEdit(task)}></i>
+              <i className="bi bi-eye-fill" onClick={() => handleEdit(task)}></i>
               <i
                 className="bi bi-trash"
                 onClick={() => handleDelete(task.title)}
