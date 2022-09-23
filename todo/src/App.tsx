@@ -6,7 +6,7 @@ import Footer from "./pages/Footer/Footer";
 import Header from "./pages/Header/Header";
 import Modal from "./pages/Modal/Modal";
 import TaskForm from "./pages/Home/TaskForm";
-import TaskList from "./pages/Lista/TaskList";
+import Lista from './pages/Lista/TaskList';
 import Login from "./pages/Logar/Login";
 
 // interfaces
@@ -16,14 +16,17 @@ import { BrowserRouter } from "react-router-dom";
 import Routess from "./routes";
 import Form from "./pages/Form/Form";
 import Modalx from "./pages/Modal/Modal"
+import Notas from "./pages/Notas/Notas";
+import TaskList from "./pages/Lista/TaskList";
 
 function App() {
+
 
   return (
     <div>
       <Header/>
       <BrowserRouter>
-        <Routess />
+        <Login/>
       </BrowserRouter>
       <Footer />
     </div>

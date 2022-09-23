@@ -61,7 +61,7 @@ const Form = (props: Props) => {
             btnText="Cadastrar"
           />
         </div>
-        <div className="todo-container">
+         <div className="todo-container">
           <h2>Suas notas:</h2>
           <TaskList
             taskList={taskList}
