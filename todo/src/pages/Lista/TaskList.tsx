@@ -1,7 +1,7 @@
 import React from "react";
 
 // interfaces
-import { ITask } from "../interfaces/Task";
+import { ITask } from "../../interfaces/Task";
 
 import styles from "./TaskList.module.css";
 
