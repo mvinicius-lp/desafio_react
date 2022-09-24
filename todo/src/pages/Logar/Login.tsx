@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
 import styles from '../Logar/Login.module.css'
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import {LoginUser} from './../../service/Users'
-import { AuthContext } from "../../App"
+import { AuthContext } from "../../routes"
 
 type Props = {}
 
@@ -14,6 +14,8 @@ const Login = (props: Props) => {
   let token = ''
   
   const auth = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     console.log("entrou")
@@ -29,6 +31,7 @@ const Login = (props: Props) => {
     }
     LoginUser(user).then((response)=> {
       auth.setAuth({token: response.data.token, nome: response.data.nome});
+      navigate('/form');
     }).catch((error)=>{
         alert("Usario ou senha incorreta");
     })

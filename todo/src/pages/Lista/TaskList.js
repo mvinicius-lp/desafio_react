@@ -6,7 +6,7 @@ import { ITask } from "../../interfaces/Task";
 import styles from "./TaskList.module.css";
 // API
 import {DeleteNotas, ListarNotas} from '../../service/api';
-import { AuthContext } from "../../App";
+// import { AuthContext } from "../../App";
 
 // interface Props {
 //   taskList: ITask[];
@@ -17,37 +17,37 @@ import { AuthContext } from "../../App";
 const TaskList = ({ taskList, handleDelete, handleEdit }) => {
 
   const [notas, setNotas] = useState([])
-  const  context = useContext(AuthContext)
+  // const  context = useContext(AuthContext)
 
   // useEffect(()=>{
   //   carregarNotas()
   // },[])
 
   function carregarNotas(){
-    ListarNotas(context.token.token).then(
-      (response) => {
-        if(response.data != null){
-          setNotas(response.data.notes)
-        }
-      }
-    ).catch(
-        (error => {
-            console.log(error);
-        })
-    )
+    // ListarNotas(context.token.token).then(
+    //   (response) => {
+    //     if(response.data != null){
+    //       setNotas(response.data.notes)
+    //     }
+    //   }
+    // ).catch(
+    //     (error => {
+    //         console.log(error);
+    //     })
+    // )
   }
 
   function deletarNota(id) {
-    DeleteNotas(context.token.token, id).then(
-      (response) => {
-        carregarNotas()
-        alert("Nota Deletada");
-      }
-    ).catch(
-        (error => {
-            console.log(error);
-        })
-    )
+    // DeleteNotas(context.token.token, id).then(
+    //   (response) => {
+    //     carregarNotas()
+    //     alert("Nota Deletada");
+    //   }
+    // ).catch(
+    //     (error => {
+    //         console.log(error);
+    //     })
+    // )
   }
 
   return (
