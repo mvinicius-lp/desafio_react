@@ -1,11 +1,39 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import styles from '../Logar/Login.module.css'
-import {LoginUser} from "../../service/api";
 import { Link } from 'react-router-dom';
+import {LoginUser} from './../../service/Users'
+import { AuthContext } from "../../App"
 
 type Props = {}
 
 const Login = (props: Props) => {
+
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [error, setError] = useState("");
+  let token = ''
+  
+  const auth = useContext(AuthContext);
+
+  const handleLogin = () => {
+    console.log("entrou")
+    if (!email || !senha) {
+      setError("Preencha todos os campos");
+      return;
+    }
+
+
+    const user = {
+      "email": email,
+      "password": senha
+    }
+    LoginUser(user).then((response)=> {
+      auth.setAuth({token: response.data.token, nome: response.data.nome});
+    }).catch((error)=>{
+        alert("Usario ou senha incorreta");
+    })
+  };
+  
   return (   
     <div className={styles.center}>
       <br /><br /><br /><br /><br />
@@ -17,6 +45,7 @@ const Login = (props: Props) => {
           type="text"
           name="email"
           placeholder="ex. contato@htmlecsspro.com"
+          onChange={(e) => [setEmail(e.target.value), setError("")]}
         />
       </div>
       <div className={styles.input_container}>
@@ -25,9 +54,10 @@ const Login = (props: Props) => {
           type="text"
           name="senha"
           placeholder="ex. senha"
+          onChange={(e) => [setSenha(e.target.value), setError("")]}
         />
       </div>
-      <input type="submit" value="Logar"/>
+      <input className={styles.botao} value="Logar" onClick={handleLogin}/>
       <div>
         <p>
           Ainda não tem uma conta?

@@ -6,12 +6,7 @@ import styles from "./Header.module.css";
 
 const Header = () => {
   return (
-    <nav className={styles.header}>
-     <div className={styles.acoes}>
-        <a href="">Cadastrar nota</a>
-        <a href="">Ver notas</a>
-    </div>
-    </nav>
+    <h1>flimed-app-todo</h1>
   );
 };
 

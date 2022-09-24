@@ -1,11 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '../Logar/Login.module.css'
-import {CadastroUser} from '../../service/api'
 import { Link } from 'react-router-dom'
+import {CadastroUser} from '../../service/Users'
 
-type Props = {}
+export default () => {
+  const [email, setEmail] = useState("");
+  const [nome, setNome] = useState("");
+  const [senha, setSenha] = useState("");
+  const [error, setError] = useState("");
 
-const Cadastro = (props: Props) => {
+  const handleSignup = () => {
+
+    // if (!email || !nome || !senha) {
+    //   setError("Preencha todos os campos");
+    //   return;
+    // } 
+
+    const user = {
+      "name": nome,
+      "email": email,
+      "password": senha
+    }
+
+   const res = CadastroUser(user);
+    CadastroUser(user).then((response)=>{
+      console.log("Deu certo")
+    }).catch((error)=>{
+        alert("Usuário não cadastrado");
+    })
+    
+  };
+
   return (   
     <div className={styles.center}>
       <br /><br /><br /><br /><br />
@@ -17,6 +42,7 @@ const Cadastro = (props: Props) => {
           type="text"
           name="nome"
           placeholder="Digite seu nome"
+          onChange={(e) => [setNome(e.target.value), setError("")]}
         />
       </div>
       <div className={styles.input_container}>
@@ -25,6 +51,7 @@ const Cadastro = (props: Props) => {
           type="text"
           name="email"
           placeholder="Digite seu email"
+          onChange={(e) => [setEmail(e.target.value), setError("")]}
         />
       </div>
       <div className={styles.input_container}>
@@ -33,9 +60,10 @@ const Cadastro = (props: Props) => {
           type="text"
           name="senha"
           placeholder="Crie uma senha"
+          onChange={(e) => [setSenha(e.target.value), setError("")]}
         />
+        <input className={styles.botao} value="Cadastrar" onClick={handleSignup}/>
       </div>
-      <input type="submit" value="Cadastrar"/>
       <p>  
           Já tem conta?
           <Link to="/"> Ir para Login </Link>
@@ -44,5 +72,3 @@ const Cadastro = (props: Props) => {
     <br /><br /><br /><br /><br /><br /></div>
   )
 }
-
-export default Cadastro

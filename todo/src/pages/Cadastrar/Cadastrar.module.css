@@ -49,3 +49,16 @@ a{
   text-align: center;
   justify-content: center center;
 }
+
+.botao{
+  text-align: center;
+  background-color: #00DBB2;
+  border: 1px solid #00DBB2;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background-color: #fff;
+  border-color: #282c34;
+}

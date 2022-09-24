@@ -1,36 +1,53 @@
-import React, { useState } from "react";
-import styles from "./App.module.css";
-
-// components
-import Footer from "./pages/Footer/Footer";
-import Header from "./pages/Header/Header";
-import Modal from "./pages/Modal/Modal";
-import TaskForm from "./pages/Home/TaskForm";
-import Lista from './pages/Lista/TaskList';
+import React, { createContext, useState } from "react";
+import { Router, Route, Navigate, BrowserRouter } from 'react-router-dom';
 import Login from "./pages/Logar/Login";
-
-// interfaces
-import { ITask } from "./interfaces/Task";
 import Cadastro from "./pages/Cadastrar/Cadastro";
-import { BrowserRouter } from "react-router-dom";
-import Routess from "./routes";
 import Form from "./pages/Form/Form";
-import Modalx from "./pages/Modal/Modal"
-import Notas from "./pages/Notas/Notas";
-import TaskList from "./pages/Lista/TaskList";
+import Routess from "./routes";
+import Footer from "./pages/Footer/Footer";
 import Navbar from "./pages/Navbar/Navbar";
+export const AuthContext = createContext<IProviderAuth>({ token: null, setAuth: null});
+
+interface IProviderAuth {
+  token: any,
+  setAuth: any
+}
 
 function App() {
 
+  const [auth, setAuth] = useState({ token: localStorage.getItem("token"), nome: localStorage.getItem("nome")});
+  const setAuthLS = (newAuth: any)=>{
+    setAuth(newAuth);
+    console.log(newAuth)
+    localStorage.setItem("token", newAuth.token);
+    localStorage.setItem("nome", newAuth.nome);
+  }
 
   return (
-    <div>
+
+    <AuthContext.Provider value={{ token: auth, setAuth: setAuthLS }}>
       <BrowserRouter>
+          {/* <Route path="/form">
+            {
+              auth.token == null ?
+                <Navigate to="/login"></Navigate> :
+                <Navbar></Navbar>
+            }
+          </Route> */}
+          <Routess/>
+        </BrowserRouter>
+        {/* <Route path="/login" element={<Login />}/>
+        <Route path="/cadastro" element={<Cadastro/>}/>
+        <Route path="/form" element={<Form />} /> */}
+
+        
+      {/* <BrowserRouter>
         <Navbar/>
         <Routess/>
       </BrowserRouter>
-      <Footer/>
-    </div>
+      <Footer/> */}
+        
+    </AuthContext.Provider>
   );
 }
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function ListarNotas(token: any){
+export function Listar(token: any){
     return axios({
         method:"GET",
         url:"https://test-flimed-backend.herokuapp.com/users/show",
@@ -10,7 +10,7 @@ export function ListarNotas(token: any){
     })
 }
 
-export function GetNota(token: any, id: any){
+export function Get(token: any, id: any){
     return axios({
         method:"GET",
         url:`https://test-flimed-backend.herokuapp.com/notes/show/${id}`,
@@ -19,7 +19,7 @@ export function GetNota(token: any, id: any){
         }
     })
 }
-export function AtualizaNota(token: any, id: any, nota: any){
+export function Atualiza(token: any, id: any, nota: any){
     return axios({
         method:"PUT",
         url:`https://test-flimed-backend.herokuapp.com/notes/update/${id}`,
@@ -30,7 +30,7 @@ export function AtualizaNota(token: any, id: any, nota: any){
     })
 }
 
-export function CriarNotas(token: any, nota: any){
+export function Cria(token: any, nota: any){
     return(
         axios({
             method: "POST",
@@ -43,7 +43,7 @@ export function CriarNotas(token: any, nota: any){
     );
 }
 
-export function DeleteNotas(token: any, id: any){
+export function Deleta(token: any, id: any){
     return(
         axios({
             method: "DELETE",

@@ -1,77 +1,109 @@
-import React, { useState } from 'react'
-import { ITask } from '../../interfaces/Task';
-import TaskForm from '../Home/TaskForm';
-import TaskList from '../Lista/TaskList';
-import styles from "../../App.module.css";
-import Modal from "../Modal/Modal"
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 
-type Props = {}
+// interfaces
+import { ITask } from "../../interfaces/Task";
 
-const Form = (props: Props) => {
-    const [taskToUpdate, setTaskToUpdate] = useState<ITask | null>(null);
-    const [taskList, setTaskList] = useState<ITask[]>([]);
-    const deleteTask = (title: string): void => {
-        setTaskList(
-          taskList.filter((task) => {
-            return task.title !== title;
-          })
-        );
-      };
-      const updateTask = (id: number, title: string, difficulty: string, content: string) => {
-        const updatedTask: ITask = { id, title, difficulty, content};
-    
-        const updatedItems = taskList.map((task) => {
-          return task.id === updatedTask.id ? updatedTask : task;
-        });
-    
-        setTaskList(updatedItems);
-    
-        hideOrShowModal(false);
-      };
-      const hideOrShowModal = (display: boolean) => {
-        const modal = document.getElementById("modal");
-        if (display) {
-          modal!.classList.remove("hide");
-        } else {
-          modal!.classList.add("hide");
-        }
-      };
-    
-      const editTask = (task: ITask): void => {
-        hideOrShowModal(true);
-        setTaskToUpdate(task);
-      };
+// styles
+import styles from "./TaskForm.module.css";
 
-  return (
-    <><Modal children={
-      <TaskForm
-      btnText="Editar"
-      taskList={taskList}
-      task={taskToUpdate}
-      handleUpdate={updateTask}
-    />
-    } title="Modal"/>
 
-    <main className={styles.main}>
-        <div className={styles.todo_form}>
-          <h2>Cadastre uma nota</h2>
-          <TaskForm
-            taskList={taskList}
-            setTaskList={setTaskList}
-            btnText="Cadastrar"
-          />
-        </div>
-         <div className="todo-container">
-          <h2>Suas notas:</h2>
-          <TaskList
-            taskList={taskList}
-            handleDelete={deleteTask}
-            handleEdit={editTask}
-          />
-        </div>
-      </main>
-    </>
-  )
+interface Props {
+  btnText: string;
+  taskList: ITask[];
+  setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>;
+  task?: ITask | null;
+  handleUpdate?(id: number, title: string, difficulty: string, content: string): void;
 }
 
-export default Form
+const TaskForm = ({
+  btnText,
+  taskList,
+  setTaskList,
+  task,
+  handleUpdate,
+}: Props) => {
+  const [id, setId] = useState<number>(0);
+  const [title, setTitle] = useState<string>("");
+  const [difficulty, setDifficulty] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+
+  useEffect(() => {
+    if (task) {
+      setId(task.id);
+      setTitle(task.title);
+      setDifficulty(task.difficulty);
+      setContent(task.content);
+    }
+  }, [task]);
+
+  const addTaskHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(handleUpdate);
+    if (taskList) {
+      if (handleUpdate) {
+        console.log(title);
+        console.log(difficulty);
+        console.log(content)
+        handleUpdate(id, title, difficulty, content);
+      } else {
+        const id = Math.floor(Math.random() * 1000);
+
+        const newTask: ITask = { id, title, difficulty, content };
+
+        setTaskList!([...taskList, newTask]);
+
+        setTitle("");
+        setDifficulty("");
+        setContent("");
+      }
+    }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === "title") {
+      setTitle(e.target.value);
+    } else if(e.target.name === "difficulty"){
+      setDifficulty(e.target.value);
+    }else{
+      setContent(e.target.value);
+    }
+  };
+
+  return (
+    <form onSubmit={addTaskHandler} className={styles.form}>
+      <div className={styles.input_container}>
+        <label htmlFor="title">Título</label>
+        <input
+          type="text"
+          name="title"
+          placeholder="Título da nota"
+          value={title}
+          onChange={handleChange}
+        />
+      </div>
+      <div className={styles.input_container}>
+        <label htmlFor="difficulty">Descrição</label>
+        <input
+          type="text"
+          name="difficulty"
+          placeholder="Descrição da nota"
+          value={difficulty}
+          onChange={handleChange}
+        />
+      </div>
+      <div className={styles.input_container}>
+        <label htmlFor="content">Conteúdo</label>
+        <input
+          type="text"
+          name="content"
+          placeholder="Conteúdo da nota"
+          value={content}
+          onChange={handleChange}
+        />
+      </div>
+      <input type="submit" value={btnText} />
+    </form>
+  );
+};
+
+export default TaskForm;

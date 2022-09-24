@@ -2,11 +2,11 @@ import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 
 // interfaces
 import { ITask } from "../../interfaces/Task";
+import Header from "../Header/Header";
 
 // styles
 import styles from "./TaskForm.module.css";
 
-import {Notas} from '../../service/api'
 
 interface Props {
   btnText: string;
@@ -71,6 +71,7 @@ const TaskForm = ({
   };
 
   return (
+    <>
     <form onSubmit={addTaskHandler} className={styles.form}>
       <div className={styles.input_container}>
         <label htmlFor="title">Título</label>
@@ -94,16 +95,16 @@ const TaskForm = ({
       </div>
       <div className={styles.input_container}>
         <label htmlFor="content">Conteúdo</label>
-        <input
-          type="text"
+        <input className={styles.tam}
+          type="textarea"
           name="content"
-          placeholder="Conteúdo da nota"
           value={content}
           onChange={handleChange}
         />
       </div>
       <input type="submit" value={btnText} />
     </form>
+    </>
   );
 };
 
