@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { ITask } from '../../interfaces/Task';
 import TaskForm from '../Home/TaskForm';
-import TaskList from '../Lista/TaskList';
 import styles from "../../App.module.css";
 import Modal from "../Modal/Modal"
 
@@ -54,21 +53,12 @@ const Form = (props: Props) => {
 
     <main className={styles.main}>
         <div className={styles.todo_form}>
-          <h2>Cadastre uma nota</h2>
           <TaskForm
             taskList={taskList}
             setTaskList={setTaskList}
             btnText="Cadastrar"
           />
         </div>
-         {/* <div className="todo-container">
-          <h2>Suas notas:</h2>
-          <TaskList
-            taskList={taskList}
-            handleDelete={deleteTask}
-            handleEdit={editTask}
-          />
-        </div> */}
       </main>
     </>
   )

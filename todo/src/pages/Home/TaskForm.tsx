@@ -105,7 +105,6 @@ const TaskForm = ({}: Props) => {
     <br />
     <br />
     <br />
-    <h1>Cadastre uma nota</h1>
     <br />
     <form onSubmit={(e) => {addTaskHandler(e)}} className={styles.form}>
       <div className={styles.input_container}>

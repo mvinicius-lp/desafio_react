@@ -11,12 +11,7 @@ export default () => {
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
 
-  const handleSignup = () => {
-
-    // if (!email || !nome || !senha) {
-    //   setError("Preencha todos os campos");
-    //   return;
-    // } 
+  const handleSignup = () => { 
 
     const user = {
       "name": nome,
@@ -26,7 +21,7 @@ export default () => {
 
    const res = CadastroUser(user);
     CadastroUser(user).then((response)=>{
-      console.log("Deu certo")
+      alert("Cadastrado com sucesso!");
     }).catch((error)=>{
         alert("Usuário não cadastrado");
     })
@@ -39,7 +34,7 @@ export default () => {
     <br /><br /><br /><br /><br />
     <div className={styles.center}>
       <form className={styles.form}>
-      <h1>CADASTRO</h1>
+      <h1>CADASTRO DE USUÁRIO</h1>
       <div className={styles.input_container}>
         <label htmlFor="nome">Nome</label>
         <input
