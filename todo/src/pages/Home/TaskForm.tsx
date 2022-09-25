@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect, useContext } from "react";
 
 // interfaces
 import { ITask } from "../../interfaces/Task";
@@ -6,6 +6,12 @@ import Header from "../Header/Header";
 
 // styles
 import styles from "./TaskForm.module.css";
+import { AuthContext } from '../../routes';
+import { useParams } from "react-router-dom";
+import { Atualiza, Cria, Get } from "../../service/Api";
+import { title } from "process";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
 
 interface Props {
@@ -16,81 +22,102 @@ interface Props {
   handleUpdate?(id: number, title: string, difficulty: string, content: string): void;
 }
 
-const TaskForm = ({
-  btnText,
-  taskList,
-  setTaskList,
-  task,
-  handleUpdate,
-}: Props) => {
-  const [id, setId] = useState<number>(0);
-  const [title, setTitle] = useState<string>("");
-  const [difficulty, setDifficulty] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+
+const TaskForm = ({}: Props) => {
+  
+  const { id } = useParams();
 
   useEffect(() => {
-    if (task) {
-      setId(task.id);
-      setTitle(task.title);
-      setDifficulty(task.difficulty);
-      setContent(task.content);
-    }
-  }, [task]);
+    Get(context.token.token, id).then(
+      (response) => {
+        if (response.data.note != null) {
+          console.log("entrou no form")
+          console.log(response.data.note)
+          setNota({
+            ...nota,
+            title: response.data.note.title,
+            content: response.data.note.content,
+            description: response.data.note.description
+          })
+        }
 
-  const addTaskHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(handleUpdate);
-    if (taskList) {
-      if (handleUpdate) {
-        console.log(title);
-        console.log(difficulty);
-        console.log(content)
-        handleUpdate(id, title, difficulty, content);
-      } else {
-        const id = Math.floor(Math.random() * 1000);
-
-        const newTask: ITask = { id, title, difficulty, content };
-
-        setTaskList!([...taskList, newTask]);
-
-        setTitle("");
-        setDifficulty("");
-        setContent("");
       }
-    }
-  };
+    ).catch(
+      (error => {
+        console.log(error);
+      })
+    )
+  }, [id])
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === "title") {
-      setTitle(e.target.value);
-    } else if(e.target.name === "difficulty"){
-      setDifficulty(e.target.value);
-    }else{
-      setContent(e.target.value);
+  const context = useContext(AuthContext)
+
+
+  const [nota, setNota] = useState({
+    title: ' ',
+    content: ' ',
+    description: ' '
+  })
+
+
+  function updatedNota(e: React.ChangeEvent<HTMLInputElement>) {
+
+    setNota({
+      ...nota,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  function addTaskHandler(e: { preventDefault: () => void; }) {
+    e.preventDefault()
+
+    if (id == null) {
+      Cria(context.token.token, nota).then(
+        (response) => {
+          console.log("Cadastrado")
+          console.log(response.data)
+          alert("Nota Criada");
+        }
+      ).catch(
+        (error => {
+          console.log(error);
+        })
+      )
+    } else {
+      Atualiza(context.token.token, id, nota).then(
+        (response) => {
+          alert("Nota Editada");
+        }
+      ).catch(
+        (error => {
+          console.log(error);
+        })
+      )
     }
-  };
+
+  }
 
   return (
     <>
-    <form onSubmit={addTaskHandler} className={styles.form}>
+    <Navbar/>
+    <form onSubmit={(e) => {addTaskHandler(e)}} className={styles.form}>
       <div className={styles.input_container}>
         <label htmlFor="title">Título</label>
         <input
           type="text"
           name="title"
           placeholder="Título da nota"
-          value={title}
-          onChange={handleChange}
+          value={nota.title}
+          onChange={(e) => updatedNota(e)}
         />
       </div>
       <div className={styles.input_container}>
-        <label htmlFor="difficulty">Descrição</label>
+        <label htmlFor="description">Descrição</label>
         <input
           type="text"
-          name="difficulty"
+          name="description"
           placeholder="Descrição da nota"
-          value={difficulty}
-          onChange={handleChange}
+          value={nota.description}
+          onChange={(e) => updatedNota(e)}
         />
       </div>
       <div className={styles.input_container}>
@@ -98,12 +125,13 @@ const TaskForm = ({
         <input className={styles.tam}
           type="textarea"
           name="content"
-          value={content}
-          onChange={handleChange}
+          value={nota.content}
+          onChange={(e) => updatedNota(e)}
         />
       </div>
-      <input type="submit" value={btnText} />
+      <input type="submit" value="Salvar"/>
     </form>
+    <Footer/>
     </>
   );
 };

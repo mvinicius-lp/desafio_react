@@ -5,6 +5,7 @@ import Login from './pages/Logar/Login'
 import Cadastro from './pages/Cadastrar/Cadastro'
 import Form from './pages/Form/Form';
 import Navbar from './pages/Navbar/Navbar';
+import TaskList from "./pages/Lista/TaskList";
 
 export const AuthContext = createContext<IProviderAuth>({ token: null, setAuth: null});
 
@@ -25,12 +26,14 @@ const Routess: any = () => {
     return (
         <AuthContext.Provider value={{ token: auth, setAuth: setAuthLS }}>
             <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro/>}/>
+                <Route path="/edit/:id" element={<Form/>}/>
+                <Route path="/lista" element={<TaskList/>}/>
                 <Route
-                    path="/form"
+                    path="/"
                     element={auth.token == null ? 
-                    <Navigate to='/' replace /> :
+                    <Navigate to='/login' replace /> :
                     <Form />} />
             </Routes>
         </AuthContext.Provider>

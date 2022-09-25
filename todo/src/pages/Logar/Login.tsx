@@ -18,7 +18,6 @@ const Login = (props: Props) => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    console.log("entrou")
     if (!email || !senha) {
       setError("Preencha todos os campos");
       return;
@@ -31,7 +30,7 @@ const Login = (props: Props) => {
     }
     LoginUser(user).then((response)=> {
       auth.setAuth({token: response.data.token, nome: response.data.nome});
-      navigate('/form');
+      navigate('/');
     }).catch((error)=>{
         alert("Usario ou senha incorreta");
     })
@@ -72,5 +71,4 @@ const Login = (props: Props) => {
   </div>
   )
 }
-
 export default Login
