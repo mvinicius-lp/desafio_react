@@ -1,15 +1,9 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect, useContext } from "react";
-
-// interfaces
 import { ITask } from "../../interfaces/Task";
-import Header from "../Header/Header";
-
-// styles
 import styles from "./TaskForm.module.css";
 import { AuthContext } from '../../routes';
 import { Link, useParams } from "react-router-dom";
 import { Atualiza, Cria, Get } from "../../service/Api";
-import { title } from "process";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 
@@ -31,7 +25,6 @@ const TaskForm = ({}: Props) => {
     Get(context.token.token, id).then(
       (response) => {
         if (response.data.note != null) {
-          console.log("entrou no form")
           console.log(response.data.note)
           setNota({
             ...nota,
@@ -73,9 +66,8 @@ const TaskForm = ({}: Props) => {
     if (id == null) {
       Cria(context.token.token, nota).then(
         (response) => {
-          console.log("Cadastrado")
           console.log(response.data)
-          alert("Nota Criada");
+          alert("Nota criada com sucesso!");
         }
       ).catch(
         (error => {
@@ -85,7 +77,7 @@ const TaskForm = ({}: Props) => {
     } else {
       Atualiza(context.token.token, id, nota).then(
         (response) => {
-          alert("Nota Editada");
+          alert("Nota Editada com sucesso!");
         }
       ).catch(
         (error => {

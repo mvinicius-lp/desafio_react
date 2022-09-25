@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import {CadastroUser} from '../../service/Users'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
+import Login from '../Logar/Login'
 
 export default () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,12 @@ export default () => {
   const [error, setError] = useState("");
 
   const handleSignup = () => { 
+
+    
+    if (!email || !nome || !senha) {
+      setError("Preencha todos os campos");
+      return;
+    } 
 
     const user = {
       "name": nome,

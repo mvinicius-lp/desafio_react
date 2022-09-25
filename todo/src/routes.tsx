@@ -1,10 +1,8 @@
 import React, { createContext, useState } from "react";
 import { BrowserRouter as Router, Navigate, Routes, Route, Link, useNavigate }  from 'react-router-dom';
-
 import Login from './pages/Logar/Login'
 import Cadastro from './pages/Cadastrar/Cadastro'
 import Form from './pages/Form/Form';
-import Navbar from './pages/Navbar/Navbar';
 import TaskList from "./pages/Lista/TaskList";
 
 export const AuthContext = createContext<IProviderAuth>({ token: null, setAuth: null});

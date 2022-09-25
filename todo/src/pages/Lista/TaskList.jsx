@@ -1,7 +1,5 @@
 import React, { Props, useContext, useEffect, useState } from "react";
-// CSS
 import styles from "./TaskList.module.css";
-// API
 import {Deleta, Listar} from '../../service/Api';
 import { AuthContext } from "../../routes";
 import { Link } from "react-router-dom";
@@ -36,7 +34,7 @@ const TaskList = () => {
     Deleta(context.token.token, id).then(
       (response) => {
         carregarNotas()
-        alert("Nota Deletada");
+        alert("Deletada com sucesso!");
       }
     ).catch(
         (error => {
@@ -69,7 +67,6 @@ const TaskList = () => {
           <br /><br />
           Não há notas cadastradas</h3>
       )}
-      <Footer/>
     </div>
   );
 };
