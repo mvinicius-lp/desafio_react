@@ -7,7 +7,7 @@ import Header from "../Header/Header";
 // styles
 import styles from "./TaskForm.module.css";
 import { AuthContext } from '../../routes';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Atualiza, Cria, Get } from "../../service/Api";
 import { title } from "process";
 import Navbar from "../Navbar/Navbar";
@@ -97,8 +97,16 @@ const TaskForm = ({}: Props) => {
   }
 
   return (
+    
     <>
+    <div>
     <Navbar/>
+    </div>
+    <br />
+    <br />
+    <br />
+    <h1>Cadastre uma nota</h1>
+    <br />
     <form onSubmit={(e) => {addTaskHandler(e)}} className={styles.form}>
       <div className={styles.input_container}>
         <label htmlFor="title">Título</label>

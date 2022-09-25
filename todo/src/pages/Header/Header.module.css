@@ -1,6 +1,8 @@
 .header {
   background-color: #123D74;
   color: #00DBB2;
-  text-align: end;
-  padding: 1em;
+  line-height: 100px;
+  display: flex;
+  width: 100%;
+  height: 70px;
 }

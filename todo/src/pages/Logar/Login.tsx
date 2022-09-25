@@ -3,6 +3,8 @@ import styles from '../Logar/Login.module.css'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import {LoginUser} from './../../service/Users'
 import { AuthContext } from "../../routes"
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
 type Props = {}
 
@@ -37,6 +39,8 @@ const Login = (props: Props) => {
   };
   
   return (   
+    <>
+    <Header/>
     <div className={styles.center}>
       <br /><br /><br /><br /><br />
       <form className={styles.form}>
@@ -68,7 +72,9 @@ const Login = (props: Props) => {
       </div>
     </form>
     <br /><br /><br /><br /><br /><br /><br /><br />
+    <Footer/>
   </div>
+  </>
   )
 }
 export default Login

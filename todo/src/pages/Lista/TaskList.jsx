@@ -65,7 +65,9 @@ const TaskList = () => {
           </div>
         ))
       ) : (
-        <p>Não há notas cadastradas</p>
+        <h3>
+          <br /><br />
+          Não há notas cadastradas</h3>
       )}
       <Footer/>
     </div>

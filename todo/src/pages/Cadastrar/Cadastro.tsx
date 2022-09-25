@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import styles from '../Logar/Login.module.css'
 import { Link } from 'react-router-dom'
 import {CadastroUser} from '../../service/Users'
+import Footer from '../Footer/Footer'
+import Header from '../Header/Header'
 
 export default () => {
   const [email, setEmail] = useState("");
@@ -32,10 +34,12 @@ export default () => {
   };
 
   return (   
+    <>
+    <Header/>
+    <br /><br /><br /><br /><br />
     <div className={styles.center}>
-      <br /><br /><br /><br /><br />
       <form className={styles.form}>
-      <h1 id={styles.cadastro}>Cadastro</h1>
+      <h1>CADASTRO</h1>
       <div className={styles.input_container}>
         <label htmlFor="nome">Nome</label>
         <input
@@ -66,9 +70,11 @@ export default () => {
       </div>
       <p>  
           Já tem conta?
-          <Link to="/"> Ir para Login </Link>
+          <Link to="/login"> Ir para Login </Link>
       </p>
     </form>
     <br /><br /><br /><br /><br /><br /></div>
+    <Footer/>
+    </>
   )
 }
